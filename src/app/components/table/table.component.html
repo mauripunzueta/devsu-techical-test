@@ -1,0 +1,23 @@
+<div class="products-table">
+  <table class="products">
+    <thead>
+      <tr>
+        <th class="left">Logo</th>
+        <th>Nombre del producto</th>
+        <th>Descripción</th>
+        <th>Fecha de liberación</th>
+        <th>Fecha de reestructuración</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of filteredProducts | slice:(currentPage-1)*selectNum:currentPage*selectNum">
+        <td class="left"><img src="{{ product.logo }}" alt="Product Logo"></td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.date_realease | date:'dd/MM/yyyy' }}</td>
+        <td>{{ product.date_revision | date:'dd/MM/yyyy' }}</td>
+        <td class="options"><button class="options-button">&#x22EE;</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

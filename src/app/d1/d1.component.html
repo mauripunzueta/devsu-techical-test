@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="content">
+    <div class="top">
+      <app-search [searchControl]="searchControl"></app-search>
+      <button class="add-button" (click)="navigateToD2()">Agregar</button>
+    </div>
+
+    <div class="table">
+      <app-table
+        [currentPage]="currentPage" [selectNum]="selectNum"
+        (productsChange)="handleProductsChange($event)"
+        (filteredProductsChange)="handleFilteredProductsChange($event)"
+        (productsNumChange)="handleProductsNumChange($event)"
+        (pageNumbersChange)="handlePageNumbersChange($event)">
+      </app-table>
+      <app-pagination [productsNum]="productsNum" [pageNumbers]="pageNumbers" [selectNumForm]="selectNumForm"
+        (currentPageChange)="handleCurrentPage($event)">
+      </app-pagination>
+    </div>
+  </div>
+</div>

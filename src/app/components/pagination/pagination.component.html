@@ -1,0 +1,13 @@
+<div class="footer">
+  <span>{{ productsNum }} Resultados</span>
+  <div class="pagination" *ngIf="pageNumbers.length > 1">
+    <button *ngFor="let pageNumber of getVisiblePages()" (click)="setCurrentPage(pageNumber)" [ngClass]="{'selected-page': pageNumber === currentPage}">
+      {{ pageNumber }}
+    </button>
+  </div>
+  <select class="dropdown" [formControl]="selectNumForm">
+    <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+  </select>
+</div>
