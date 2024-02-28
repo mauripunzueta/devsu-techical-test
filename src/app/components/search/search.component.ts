@@ -8,4 +8,5 @@ import { FormControl } from '@angular/forms';
 })
 export class SearchComponent {
   @Input() searchControl!: FormControl;
+
 }
