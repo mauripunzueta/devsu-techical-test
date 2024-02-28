@@ -1,23 +1,43 @@
-<div class="products-table">
-  <table class="products">
-    <thead>
-      <tr>
-        <th class="left">Logo</th>
-        <th>Nombre del producto</th>
-        <th>Descripción</th>
-        <th>Fecha de liberación</th>
-        <th>Fecha de reestructuración</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of filteredProducts | slice:(currentPage-1)*selectNum:currentPage*selectNum">
-        <td class="left"><img src="{{ product.logo }}" alt="Product Logo"></td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.description }}</td>
-        <td>{{ product.date_realease | date:'dd/MM/yyyy' }}</td>
-        <td>{{ product.date_revision | date:'dd/MM/yyyy' }}</td>
-        <td class="options"><button class="options-button">&#x22EE;</button></td>
-      </tr>
-    </tbody>
-  </table>
+<div>
+  <div class="top">
+    <div class="search-bar">
+      <input type="text" placeholder="Search..." [formControl]="searchControl">
+    </div>
+    <button class="add-button" (click)="navigateToRegister()">Agregar</button>
+  </div>
+
+  <div class="table">
+    <div class="products-table">
+      <table class="products">
+        <thead>
+          <tr>
+            <th class="left">Logo</th>
+            <th>Nombre del producto</th>
+            <th>Descripción</th>
+            <th>Fecha de liberación</th>
+            <th>Fecha de reestructuración</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of filteredProducts | slice:(currentPage-1)*selectNum:currentPage*selectNum; let i = index">
+            <td class="left"><img src="{{ product.logo }}" alt="Product Logo"></td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.date_release | date:'dd/MM/yyyy' }}</td>
+            <td>{{ product.date_revision | date:'dd/MM/yyyy' }}</td>
+            <td class="options">
+              <button class="options-button" (click)="toggleDropdown(i)">&#x22EE;</button>
+              <div *ngIf="dropdownIndex === i" class="dropdown-menu">
+                <button (click)="editProduct(product)">Editar</button>
+                <app-modal [productName]="product.name" [productId]="product.id" #confirmDialog (confirmEvent)="handleConfirmation($event)"></app-modal>
+                <button (click)="confirmDialog.show()">Eliminar</button>
+              </div>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <app-pagination [productsNum]="productsNum" [pageNumbers]="pageNumbers" [selectNumForm]="selectNumForm"
+        (currentPageChange)="handleCurrentPage($event)">
+      </app-pagination>
+  </div>
 </div>

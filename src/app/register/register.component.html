@@ -1,0 +1,119 @@
+<div class="container">
+  <div class="content">
+    <div class="registration-form">
+      <div>
+        <h1>Formulario de Registro</h1>
+        <hr/>
+      </div>
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <div class="form-group pad-bot-label">
+          <div class="col-left">
+            <label for="id">ID</label>
+          </div>
+          <div class="col-right">
+            <label for="name">Nombre</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-left">
+            <input type="text" formControlName="id">
+          </div>
+          <div class="col-right">
+            <input type="text" formControlName="name">
+          </div>
+        </div>
+        <div class="form-group pad-bot-input">
+          <div class="col-left">
+            <div *ngIf="registrationForm.get('id')?.touched">
+              <p class="error" *ngIf="registrationForm.get('id')?.errors?.['required'] || registrationForm.get('id')?.errors?.['minlength'] || registrationForm.get('id')?.errors?.['maxlength']">
+                Campo obligatorio. Debe tener entre 3 a 10 caracteres.
+              </p>
+              <p class="error" *ngIf="availability">
+                ID no disponible.
+              </p>
+            </div>
+          </div>
+          <div class="col-right">
+            <div *ngIf="registrationForm.get('name')?.touched">
+              <p class="error" *ngIf="registrationForm.get('name')?.errors?.['required'] || registrationForm.get('name')?.errors?.['minlength'] || registrationForm.get('name')?.errors?.['maxlength']">
+                Campo obligatorio. Debe tener entre 5 a 100 caracteres.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="form-group pad-bot-label">
+          <div class="col-left">
+            <label for="description">Descripción</label>
+          </div>
+          <div class="col-right">
+            <label for="logo">Logo</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-left">
+            <input type="text" formControlName="description">
+          </div>
+          <div class="col-right">
+            <input type="text" formControlName="logo">
+          </div>
+        </div>
+        <div class="form-group pad-bot-input">
+          <div class="col-left">
+            <div *ngIf="registrationForm.get('description')?.touched">
+              <p class="error" *ngIf="registrationForm.get('description')?.errors?.['required'] || registrationForm.get('description')?.errors?.['minlength'] || registrationForm.get('description')?.errors?.['maxlength']">
+                Campo obligatorio. Debe tener entre 10 a 200 caracteres.
+              </p>
+            </div>
+          </div>
+          <div class="col-right">
+            <div *ngIf="registrationForm.get('logo')?.touched">
+              <p class="error" *ngIf="registrationForm.get('logo')?.errors?.['required']">
+                Campo obligatorio.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="form-group pad-bot-label">
+          <div class="col-left">
+            <label for="date_release">Fecha Liberación</label>
+          </div>
+          <div class="col-right">
+            <label for="date_revision">Fecha Revisión</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-left">
+            <input type="date" formControlName="date_release" [min]="today">
+          </div>
+          <div class="col-right">
+            <input type="date" formControlName="date_revision">
+          </div>
+        </div>
+        <div class="form-group pad-bot-input">
+          <div class="col-left">
+            <div *ngIf="registrationForm.get('date_release')?.touched">
+              <p class="error" *ngIf="registrationForm.get('date_release')?.errors?.['required']">
+                Campo obligatorio.
+              </p>
+            </div>
+          </div>
+          <div class="col-right">
+            <div *ngIf="registrationForm.get('date_revision')?.touched">
+              <p class="error" *ngIf="registrationForm.get('date_revision')?.errors?.['required']">
+                Campo obligatorio.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <div class="bttn">
+            <button class="reset" type="button" (click)="onReset()">Reiniciar</button>
+          </div>
+          <div class="bttn">
+            <button class="submit" type="submit" [disabled]="!registrationForm.valid && !availability" [ngClass]="registrationForm.valid && !availability ? 'submit' : 'submit-disabled'">Enviar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
